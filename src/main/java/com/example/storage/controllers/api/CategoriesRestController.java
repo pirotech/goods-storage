@@ -4,8 +4,6 @@ import com.example.storage.domain.Category;
 import com.example.storage.repos.CategoryRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/categories")
 public class CategoriesRestController {
@@ -23,7 +21,10 @@ public class CategoriesRestController {
 
     @PostMapping
     public void addCategory(@RequestBody Category category) {
-        repository.save(category);
+        Category found = repository.findByName(category.getName());
+        if (found == null) {
+            repository.save(category);
+        }
     }
 
     @PatchMapping("/{id}")

@@ -4,8 +4,6 @@ import com.example.storage.domain.Goods;
 import com.example.storage.repos.GoodsRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/goods")
 public class GoodsRestController {
@@ -23,7 +21,10 @@ public class GoodsRestController {
 
     @PostMapping
     public void addGoods(@RequestBody Goods goods) {
-        repository.save(goods);
+        Goods found = repository.findByName(goods.getName());
+        if (found == null) {
+            repository.save(goods);
+        }
     }
 
     @PatchMapping("/{id}")
