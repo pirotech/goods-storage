@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goods</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bower_components/bootstrap/assets/js/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+
+    <link rel="stylesheet" href="styles/goods.css">
+    <script src="scripts/goods.js"></script>
+</head>
+<body ng-app="goods">
+
+
+<div class="col-md-8 col-md-push-2" ng-controller="goodsCtrl">
+    <div class="col-md-12">
+        <h2 class="col-md-12">Goods</h2>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Count</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="g in goods">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ g.name }}</td>
+            <td>{{ g.description }}</td>
+            <td>{{ g.category.name }}</td>
+            <td>{{ g.price }} $</td>
+            <td>{{ g.count }}</td>
+            <td>
+                <button class="btn btn-default" type="submit" ng-click="editGoods(g.id)">Edit</button>
+                <button class="btn btn-default" type="submit" ng-click="deleteGoods(g.id)">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+</body>
+</html>

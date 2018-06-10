@@ -1,0 +1,17 @@
+{
+  "name": "storage",
+  "homepage": "https://github.com/pirotech/goods-storage",
+  "authors": [
+    "Sergey Chistyakov <serjioini@gmail.com>"
+  ],
+  "description": "Goods storage",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
