@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Categories</title>
-</head>
-<body>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bower_components/bootstrap/assets/js/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
 
-Categories
+    <link rel="stylesheet" href="styles/categories.css">
+    <script src="scripts/categories.js"></script>
+</head>
+<body ng-app="categories">
+
+
+<div class="col-md-8 col-md-push-2" ng-controller="categoriesCtrl">
+    <div class="col-md-12">
+        <h2 class="col-md-12">Categories</h2>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <!--<th>Goods count</th>-->
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="c in categories">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.description }}</td>
+            <!--<td>{{ c.goodsCount }}</td> -->
+            <td>
+                <button class="btn btn-default" type="submit" ng-click="editCategory(c.id)">Edit</button>
+                <button class="btn btn-default" type="submit" ng-click="deleteCategory(c.id)">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
 
 </body>
 </html>
