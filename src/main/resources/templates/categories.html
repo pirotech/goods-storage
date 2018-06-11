@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="categories">
 <head>
     <meta charset="UTF-8">
     <title>Categories</title>
@@ -11,14 +11,32 @@
     <link rel="stylesheet" href="styles/categories.css">
     <script src="scripts/categories.js"></script>
 </head>
-<body ng-app="categories">
+<body ng-controller="categoriesCtrl">
 
 
-<div class="col-md-8 col-md-push-2" ng-controller="categoriesCtrl">
+<!-- navbar -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Goods storage</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/categories">Categories</a></li>
+                <li><a href="/goods">Goods</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- main -->
+<div class="col-md-8 col-md-push-2">
+    <!-- title -->
     <div class="col-md-12">
         <h2 class="col-md-12">Categories</h2>
     </div>
 
+    <!-- categories -->
     <table class="table">
         <tr>
             <th>#</th>
@@ -29,15 +47,68 @@
         </tr>
         <tr ng-repeat="c in categories">
             <td>{{ $index + 1 }}</td>
-            <td>{{ c.name }}</td>
-            <td>{{ c.description }}</td>
-            <!--<td>{{ c.goodsCount }}</td> -->
             <td>
-                <button class="btn btn-default" type="submit" ng-click="editCategory(c.id)">Edit</button>
-                <button class="btn btn-default" type="submit" ng-click="deleteCategory(c.id)">Delete</button>
+                <span ng-hide="editorMode && edited.id == c.id">{{ c.name }}</span>
+                <input id="name{{ c.id }}" class="form-control" type="text" placeholder="Name"
+                       ng-show="editorMode && edited.id == c.id" value="{{ c.name }}">
+            </td>
+            <td>
+                <span ng-hide="editorMode && edited.id == c.id">{{ c.description }}</span>
+                <textarea id="description{{ c.id }}" class="form-control" rows="3" placeholder="Description"
+                          ng-show="editorMode && edited.id == c.id">{{ c.description }}</textarea>
+            </td>
+            <!--<td class="goods-count"><span>{{ c.goodsCount }}</span></td> -->
+            <td>
+                <button class="btn btn-default" type="submit"
+                        ng-click="editCategory(c)" ng-hide="editorMode && edited.id == c.id">Edit</button>
+                <button class="btn btn-primary" type="submit"
+                        ng-click="saveCategory()" ng-show="editorMode && edited.id == c.id">Save</button>
+                <button class="btn btn-default" type="submit"
+                        ng-click="cancelCategory()" ng-show="editorMode && edited.id == c.id">Cancel</button>
+                <button class="btn btn-danger" type="submit" data-toggle="modal" data-target="#delete-confirm-modal"
+                        ng-click="deleteCategory(c)" ng-hide="editorMode && edited.id == c.id">Delete</button>
             </td>
         </tr>
     </table>
+
+    <!-- create category -->
+    <div class="col-md-12">
+        <h2 class="col-md-12">Create category</h2>
+    </div>
+    <div class="col-md-6">
+        <form>
+            <div class="form-group">
+                <label for="createdName">Name</label>
+                <input id="createdName" class="form-control" type="text" ng-model="created.name">
+            </div>
+            <div class="form-group">
+                <label for="createdDescription">Description</label>
+                <textarea id="createdDescription" class="form-control" rows="3" ng-model="created.description"></textarea>
+            </div>
+            <button class="btn btn-default" type="submit" ng-click="createCategory()">Create category</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- delete confirm -->
+<div id="delete-confirm-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Really?</h4>
+            </div>
+            <div class="modal-body">It is dangerous operation</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="reallyDeleteCategory()">Delete</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
