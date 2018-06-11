@@ -42,7 +42,7 @@
             <th>#</th>
             <th>Name</th>
             <th>Description</th>
-            <!--<th>Goods count</th>-->
+            <th>Goods count</th>
             <th>Actions</th>
         </tr>
         <tr ng-repeat="c in categories">
@@ -57,7 +57,9 @@
                 <textarea id="description{{ c.id }}" class="form-control" rows="3" placeholder="Description"
                           ng-show="editorMode && edited.id == c.id">{{ c.description }}</textarea>
             </td>
-            <!--<td class="goods-count"><span>{{ c.goodsCount }}</span></td> -->
+            <td>
+                <span>{{ c.goodsCount }}</span>
+            </td>
             <td>
                 <button class="btn btn-default" type="submit"
                         ng-click="editCategory(c)" ng-hide="editorMode && edited.id == c.id">Edit</button>

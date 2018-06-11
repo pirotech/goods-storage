@@ -4,11 +4,29 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
     // util
     var l = window.location;
     $scope.api = l.protocol + '//' + l.host + '/api/categories/';
+    $scope.goodsApi = l.protocol + '//' + l.host + '/api/goods/';
 
     // load
     $scope.loadCategories = function() {
         $http.get($scope.api).then(function (response) {
             $scope.categories = response.data != null ? response.data : [];
+
+            $scope.categories.forEach(function (element) {
+                element.goodsCount = 0;
+            });
+            $http.get($scope.goodsApi).then(function (responseGoods) {
+                var goods = responseGoods.data;
+                var categories = $scope.categories;
+                for (var i = 0; i < goods.length; ++i) {
+                    for (var j = 0; j < categories.length; ++j) {
+                        var category = categories[j];
+                        if (goods[i].category.id === category.id) {
+                            category.goodsCount++;
+                        }
+                    }
+                }
+            });
+            console.log(response.data);
         });
     };
 
