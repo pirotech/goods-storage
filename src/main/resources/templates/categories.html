@@ -42,13 +42,13 @@
         <tr>
             <th class="col-md-1">#</th>
             <th class="col-md-2">Name</th>
-            <th class="col-md-5">Description</th>
+            <th class="col-md-4">Description</th>
             <th class="col-md-2">Goods count</th>
-            <th class="col-md-2">Actions</th>
+            <th class="col-md-3">Actions</th>
         </tr>
         <tr ng-repeat="c in categories">
             <td>{{ $index + 1 }}</td>
-            <td>
+            <td ng-class="{'has-error': editedNameError && edited.id == c.id}">
                 <span ng-hide="editorMode && edited.id == c.id">{{ c.name }}</span>
                 <input id="name{{ c.id }}" class="form-control" type="text" placeholder="Name"
                        ng-show="editorMode && edited.id == c.id" value="{{ c.name }}">

@@ -31,9 +31,11 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
 
     // edit
     $scope.editorMode = false;
+    $scope.editedNameError = false;
     $scope.editCategory = function (category) {
         $scope.editorMode = true;
         $scope.edited = category;
+        $scope.editedNameError = false;
     };
     $scope.saveCategory = function () {
         $http.patch($scope.api + $scope.edited.id, {
@@ -42,6 +44,9 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
         }).then(function () {
             $scope.loadCategories();
             $scope.editorMode = false;
+            $scope.editedNameError = false;
+        }, function () {
+            $scope.editedNameError = true;
         });
     };
     $scope.cancelCategory = function () {
@@ -70,6 +75,8 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
             $http.post($scope.api, $scope.created).then(function () {
                 $scope.loadCategories();
                 $scope.created = {};
+            },function () {
+                $scope.createdNameError = true;
             });
         }
     };
