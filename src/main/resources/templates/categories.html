@@ -30,14 +30,15 @@
 </nav>
 
 <!-- main -->
-<div class="col-md-8 col-md-push-2">
+<div class="col-md-10 col-md-push-1">
     <!-- title -->
     <div class="col-md-12">
         <h2>Categories</h2>
     </div>
 
     <!-- categories -->
-    <table class="table">
+    <p class="container" ng-show="categories.length == 0">Empty set</p>
+    <table class="table" ng-show="categories.length > 0">
         <tr>
             <th>#</th>
             <th>Name</th>
@@ -77,7 +78,7 @@
     <div class="col-md-12">
         <h2>Create category</h2>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <form>
             <div class="form-group">
                 <label for="createdName">Name</label>

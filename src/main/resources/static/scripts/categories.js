@@ -26,7 +26,6 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
                     }
                 }
             });
-            console.log(response.data);
         });
     };
 
@@ -62,6 +61,7 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
     // create
     $scope.created = {};
     $scope.createCategory = function() {
+        console.log($scope.created);
         $http.post($scope.api, $scope.created).then(function () {
             $scope.loadCategories();
             $scope.created = {};
