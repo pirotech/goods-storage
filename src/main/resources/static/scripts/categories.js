@@ -60,12 +60,18 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
 
     // create
     $scope.created = {};
-    $scope.createCategory = function() {
-        console.log($scope.created);
-        $http.post($scope.api, $scope.created).then(function () {
-            $scope.loadCategories();
-            $scope.created = {};
-        });
+    $scope.createdNameError = false;
+    $scope.createCategory = function () {
+        var emptyName = $scope.created.name === '' || $scope.created.name === undefined;
+        if (emptyName) {
+            $scope.createdNameError = true;
+        } else {
+            $scope.createdNameError = false;
+            $http.post($scope.api, $scope.created).then(function () {
+                $scope.loadCategories();
+                $scope.created = {};
+            });
+        }
     };
 
     $scope.loadCategories();

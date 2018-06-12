@@ -22,7 +22,7 @@ public class CategoriesRestController {
     @PostMapping
     public void addCategory(@RequestBody Category category) {
         Category found = repository.findByName(category.getName());
-        if (found == null) {
+        if (found == null && category.getName() != null) {
             repository.save(category);
         }
     }
