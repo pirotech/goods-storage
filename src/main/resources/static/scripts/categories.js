@@ -51,6 +51,7 @@ var categoriesCtrl = categories.controller('categoriesCtrl', function ($scope, $
     };
     $scope.cancelCategory = function () {
         $scope.editorMode = false;
+        $scope.editedNameError = false;
     };
 
     // delete
