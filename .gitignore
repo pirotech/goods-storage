@@ -20,7 +20,7 @@
 /nbproject/private/
 /build/
 /nbbuild/
-/dist/
+# /dist/
 /nbdist/
 /.nb-gradle/
 
@@ -50,7 +50,7 @@ hs_err_pid*
 
 # bower
 node_modules
-dist
+# dist
 .tmp
 .sass-cache
 # bower_components
